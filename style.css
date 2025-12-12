@@ -1,0 +1,822 @@
+/* --- 1. CSS VARIABLES (Dark/Light Theme System) --- */
+:root {
+    --bg-primary: #f8f8f8; /* Light Mode Background */
+    --bg-secondary: #ffffff; /* Light Card/Content Background */
+    --text-primary: #1a1a1a; /* Light Mode Text */
+    --accent-color: #007bff;
+    --border-color: #e0e0e0;
+    --transition-speed: 0.4s;
+}
+
+/* Dark Mode Overrides (Applied when html[data-theme="dark"]) */
+html[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #f0f0f0;
+    --accent-color: #64ffda; /* Brighter accent for dark mode */
+    --border-color: #333333;
+}
+
+/* --- 2. GLOBAL STYLES & RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color var(--transition-speed), color var(--transition-speed), transform 0.3s;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+h1, h2 {
+    margin-bottom: 0.5em;
+    font-weight: 700;
+}
+
+/* --- 3. HEADER & NAVIGATION --- */
+#main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--bg-secondary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] #main-header {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+#main-header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+nav a {
+    margin-left: 1.5rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+/* --- 4. SECTION LAYOUTS --- */
+section {
+    padding: 100px 5%;
+    min-height: 80vh; /* Ensures content is visible */
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* HERO SECTION */
+#hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 90vh;
+    background-color: var(--bg-primary);
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.2em;
+    max-width: 800px;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    opacity: 0.8;
+}
+
+.cta-button {
+    background-color: var(--accent-color);
+    color: var(--bg-primary); /* Text color contrast for button */
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.cta-button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+/* --- HERO SECTION CUSTOMIZATION --- */
+
+.hero-content {
+    /* Ensures the content is centered, standard from previous code */
+    text-align: center;
+}
+
+.greeting {
+    font-size: 1.5rem; /* Slightly smaller than the h1 */
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--accent-color); /* Use the accent color for highlight */
+    
+    /* Ensure the greeting animates slightly differently or with a delay */
+    transition-delay: 0.1s; 
+}
+
+#hero h1 {
+    font-size: 3.5rem; /* Keep this large and prominent */
+    margin-bottom: 0.2em;
+    max-width: 800px;
+}
+
+.tagline {
+    font-size: 1.25rem; /* Slightly reduced size for the descriptive text */
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    opacity: 0.8;
+}
+
+/* Update the scroll animation delay for a staggered entrance */
+/* Add the following to your existing .js-scroll block if it's not already there */
+.js-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.greeting.js-scroll {
+    transition-delay: 0.1s; /* Appear first */
+}
+
+h1.js-scroll {
+    transition-delay: 0.3s; /* Appear second */
+}
+
+.tagline.js-scroll {
+    transition-delay: 0.5s; /* Appear third */
+}
+
+.cta-button.js-scroll {
+    transition-delay: 0.7s; /* Appear last */
+}
+/* WORK SECTION */
+#work {
+    background-color: var(--bg-secondary);
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.project-card {
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s, transform 0.3s;
+    border: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.project-card h3, .project-card p {
+    padding: 0 1.5rem;
+}
+
+.project-card h3 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+.project-link {
+    display: block;
+    margin-top: 1rem;
+    padding: 0 1.5rem;
+    font-weight: bold;
+}
+/* --- CERTIFICATIONS SECTION STYLING --- */
+#certifications {
+    padding: 80px 5%;
+    background-color: var(--bg-primary); /* Keeps it visually distinct from the work section */
+}
+
+.certification-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cert-item {
+    background-color: var(--bg-secondary);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-left: 5px solid var(--accent-color); /* Highlight strip */
+}
+
+.cert-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cert-item h4 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.cert-item p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.cert-icon {
+    font-size: 2.5rem;
+}
+
+/* Custom Icon Colors (Optional but adds great visual flair) */
+.aws-color { color: #FF9900; } 
+.learnathon-color { color: var(--accent-color); } /* Use accent for general certs */
+.rbi-color { color: #004d40; } /* Dark Teal/Money green */
+.hindi-color { color: #d32f2f; } /* Red for cultural exams */
+.nptel-color { color: #03a9f4; } /* Blue for learning platforms */
+.mongo-color { color: #47A248; } /* MongoDB Green */
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 2rem 5%;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+}
+
+.social-links a {
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+/* --- 5. ANIMATION CLASSES (Scroll-Reveal) --- */
+/* Initial State (Hidden/Off-Screen) */
+.js-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Active State (Visible/Animated In) */
+.js-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Optional: Stagger animation for children */
+#work .project-card.js-scroll {
+    transition-delay: calc(var(--item-index) * 0.1s);
+}
+/* Skill Bar Styling */
+.skill-bar-container {
+    margin-bottom: 20px;
+}
+.skill-bar {
+    background-color: var(--border-color);
+    height: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+/* --- TOOL LOGO GRID STYLING --- */
+.tool-logos-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    padding: 20px 0;
+}
+
+.tool-logos-grid img {
+    height: 50px;
+    width: 50px;
+    /* Optional: Subtle filter to make color icons work better on dark background */
+    filter: grayscale(10%) drop-shadow(0 0 5px rgba(100, 255, 218, 0.5)); 
+    transition: transform 0.3s;
+}
+
+.tool-logos-grid img:hover {
+    transform: scale(1.15);
+    filter: none; /* Remove grayscale on hover */
+}
+
+
+/* --- SKILL BAR STYLING --- */
+.skill-bars-container {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.skill-bar-container {
+    margin-bottom: 25px;
+}
+.skill-bar-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.skill-bar {
+    background-color: var(--border-color); /* Background for the bar */
+    height: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 100%;
+    width: 0%; /* Initial state for animation */
+    background-color: var(--accent-color);
+    transition: width 1.5s ease-out; /* The animation effect */
+}
+.skill-level {
+    height: 100%;
+    width: 0%; /* Initial state for animation */
+    background-color: var(--accent-color);
+    transition: width 1.5s ease-out; /* Animation */
+}
+/* --- CUSTOM SKILL BAR COLORS --- */
+
+/* MATLAB (Orange/Red Color Scheme) */
+.skill-level.matlab-bar {
+    background-color: #A6211E; /* Deep Red/Orange */
+    /* Optional: Subtle vertical gradient for depth */
+    background-image: linear-gradient(to right, #A6211E, #E57373);
+}
+
+/* Xilinx (Green/Teal Color Scheme) */
+.skill-level.xilinx-bar {
+    background-color: #008779; /* Xilinx Teal/Green */
+    background-image: linear-gradient(to right, #008779, #4DB6AC);
+}
+
+/* Python (Blue/Yellow Color Scheme) */
+.skill-level.python-bar {
+    background-color: #306998; /* Python Blue */
+    background-image: linear-gradient(to right, #306998, #FFD43B);
+}
+
+/* Embedded C/C++ (Default Accent Color) */
+.skill-level.embedded-bar {
+    background-color: var(--accent-color); 
+    /* Use the accent color defined in your CSS variables for consistency */
+}
+
+/* --- TOOL LOGO GRID STYLING (To arrange logos nicely) --- */
+
+.tool-logos-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* Increased gap for better spacing */
+    margin: 40px auto 60px auto; /* More margin below logos */
+    max-width: 800px;
+    padding: 20px 0;
+}
+
+.tool-logos-grid img {
+    height: 60px; /* Slightly larger size */
+    width: 60px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1)); 
+    transition: transform 0.3s;
+}
+
+.tool-logos-grid img:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 10px var(--accent-color)); /* Highlight on hover */
+}
+/* --- CONTACT FORM STYLING --- */
+
+.contact-form-container {
+    max-width: 600px; /* Constrain the form width */
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--bg-secondary); /* Use the card background for contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] .contact-form-container {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+/* Style for all input fields and textarea */
+.contact-form-container input[type="text"],
+.contact-form-container input[type="email"],
+.contact-form-container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--bg-primary); /* Lighter inside the form */
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form-container input:focus,
+.contact-form-container textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+/* Ensure textarea resizes vertically only */
+.contact-form-container textarea {
+    resize: vertical;
+}
+
+/* Re-style the submit button to match the CTA styling */
+.submit-button {
+    width: 100%;
+    cursor: pointer;
+    border: none;
+}
+/* --- CONTACT FORM STYLING --- */
+
+.contact-form-container {
+    max-width: 600px; /* Constrain the form width */
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--bg-secondary); /* Use the card background for contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] .contact-form-container {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+/* Style for all input fields and textarea */
+.contact-form-container input[type="text"],
+.contact-form-container input[type="email"],
+.contact-form-container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--bg-primary); /* Lighter inside the form */
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form-container input:focus,
+.contact-form-container textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+/* Ensure textarea resizes vertically only */
+.contact-form-container textarea {
+    resize: vertical;
+}
+
+/* Re-style the submit button to match the CTA styling */
+.submit-button {
+    width: 100%;
+    cursor: pointer;
+    border: none;
+}
+/* --- ABOUT SECTION ECE DETAIL STYLING --- */
+
+.about-grid {
+    display: grid;
+    /* Two columns: one slightly smaller for academic details, one larger for description */
+    grid-template-columns: 1fr 2fr; 
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Ensure single column layout on smaller screens */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.profile-details, .specialization-details {
+    background-color: var(--bg-secondary);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-details h3, .specialization-details h3 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* Description List (dl) Styling for Professional Details */
+.detail-list {
+    margin-top: 10px;
+}
+
+.detail-list dt {
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-top: 10px;
+    padding-right: 10px;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.detail-list dd {
+    margin-left: 0; /* Reset default indent */
+    padding-bottom: 10px;
+    font-size: 1.1rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.detail-list dd a {
+    color: var(--text-primary); /* Keeps the email link color neutral */
+}
+
+/* Key Areas List */
+.key-areas {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 15px;
+}
+
+.key-areas li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.key-areas li i {
+    color: var(--accent-color);
+    margin-right: 10px;
+    width: 20px; /* Aligns icons nicely */
+    text-align: center;
+}
+
+.resume-button {
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.resume-button i {
+    margin-left: 10px;
+}
+/* --- KEY AREAS LIST CUSTOMIZATION (Separators) --- */
+
+.key-areas .section-separator {
+    list-style: none; /* Hide bullet */
+    height: 1px;
+    background-color: var(--border-color); /* Light gray line */
+    margin: 15px 0; /* Space above and below separator */
+    padding: 0;
+}
+
+.key-areas .area-heading {
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-top: 10px;
+    margin-bottom: 5px;
+    list-style: none; /* Hide bullet */
+}
+
+/* Ensure font awesome icons work for new languages */
+.key-areas li i {
+    /* (This ensures all icons align properly) */
+    margin-right: 10px;
+    width: 20px; 
+    text-align: center;
+}
+/* --- LIGHTBOX / MODAL STYLING --- */
+
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+    z-index: 9999; /* Ensure it's on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#lightbox.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.lightbox-content {
+    background-color: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+#lightbox-image {
+    max-width: 100%;
+    max-height: 70vh; /* Control image height relative to viewport */
+    display: block;
+    margin: 15px auto 0;
+    border-radius: 5px;
+}
+
+#lightbox-title {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: var(--text-primary);
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.close-btn:hover {
+    color: var(--accent-color);
+    opacity: 1;
+}
+/* --- PROFILE PICTURE STYLING (Add near #hero styles) --- */
+
+.profile-picture-container {
+    margin-bottom: 30px;
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%; /* Makes it perfectly circular */
+    overflow: hidden;
+    /* Optional: Subtle border for visual pop, using accent color */
+    border: 5px solid var(--accent-color); 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    
+    /* Animation: Ensures the picture scales slightly on hover */
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-picture-container:hover {
+    transform: scale(1.05);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the circle without stretching */
+    display: block;
+}
+
+/* --- ANIMATION ADJUSTMENT (for staggered loading) --- */
+/* Add this to your existing scroll animation section */
+
+/* We use the custom CSS variable --item-index to stagger the animation */
+.js-scroll {
+    /* ... existing opacity and transform properties ... */
+    /* Add this line if not already present: */
+    transition-delay: calc(var(--item-index) * 0.1s);
+}
+/* --- HEADER ACTIONS STYLING (Add near #main-header styles) --- */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-resume-btn {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.header-resume-btn:hover {
+    opacity: 0.9;
+}
+/* --- PROJECT FILTER STYLING --- */
+.project-filters {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 10px;
+}
+
+.filter-btn {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s, transform 0.1s;
+}
+
+.filter-btn:hover {
+    background-color: var(--border-color);
+}
+
+.filter-btn.active-filter {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary); /* Text must contrast with accent color */
+    border-color: var(--accent-color);
+}
