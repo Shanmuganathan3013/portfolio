@@ -280,11 +280,12 @@ h1.js-scroll {
 .cert-icon {
     font-size: 2.5rem;
 }
+
 /* --- EDUCATION TIMELINE STYLING --- */
-#education {
+ #education {
     padding: 80px 5%;
     background-color: var(--bg-secondary);
-}
+ }
 
 .timeline {
     position: relative;
@@ -957,3 +958,4 @@ html[data-theme="dark"] .contact-form-container {
     border-color: var(--accent-color);
 
 }
+
