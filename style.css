@@ -280,6 +280,142 @@ h1.js-scroll {
 .cert-icon {
     font-size: 2.5rem;
 }
+/* --- EDUCATION TIMELINE STYLING --- */
+#education {
+    padding: 80px 5%;
+    background-color: var(--bg-secondary);
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+/* Vertical line for the timeline */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background-color: var(--border-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    /* Animation: Ensures items appear slightly offset */
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: all 0.7s ease-out;
+}
+
+.timeline-item.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Timeline Dots */
+.timeline-dot {
+    height: 15px;
+    width: 15px;
+    background-color: var(--accent-color);
+    border: 3px solid var(--bg-secondary);
+    position: absolute;
+    top: 20px;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+/* Left side alignment */
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+    transform-origin: right;
+}
+.timeline-item:nth-child(odd) .timeline-dot {
+    right: -8px; /* - (dot width/2 + line width/2) */
+}
+
+/* Right side alignment */
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+    transform-origin: left;
+}
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -8px;
+}
+
+/* Timeline Card Styling */
+.timeline-card {
+    background-color: var(--bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.timeline-card:hover {
+    transform: scale(1.02);
+}
+
+.timeline-date {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.timeline-card h4 {
+    margin: 5px 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.timeline-card .institution {
+    font-style: italic;
+    font-size: 0.95rem;
+    opacity: 0.7;
+}
+
+.timeline-card .grade {
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-top: 10px;
+}
+
+.timeline-card .card-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+}
+
+/* Responsive adjustments for mobile view */
+@media screen and (max-width: 768px) {
+    .timeline::after {
+        left: 25px; /* Move vertical line to the left */
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px; /* Make space for dot and line */
+        padding-right: 10px;
+        left: 0 !important;
+        text-align: left !important;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot, 
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: 18px; /* Center dot over the line */
+        right: auto;
+    }
+    .timeline-date {
+        margin-left: 0;
+    }
+}
 
 /* Custom Icon Colors (Optional but adds great visual flair) */
 .aws-color { color: #FF9900; } 
@@ -819,4 +955,5 @@ html[data-theme="dark"] .contact-form-container {
     background-color: var(--accent-color);
     color: var(--bg-secondary); /* Text must contrast with accent color */
     border-color: var(--accent-color);
+
 }
